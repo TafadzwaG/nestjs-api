@@ -9,11 +9,17 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     port: 3306,
     username: 'root',
     password: '',
-    database: 'typeorm_relations',
+    database: 'data_orm',
     entities: [
         __dirname + '/../**/*.entity{.ts,.js}',
         // 'node_modules/nestjs-admin/**/*.entity.js',
+        // "entity/*.js"
     ],
+    // "migrationsTableName": "custom_migration_table",
+    // "migrations": ["migration/*.js"],
+    // "cli": {
+    //     "migrationsDir": "migration"
+    // },
     synchronize: true,
 
 

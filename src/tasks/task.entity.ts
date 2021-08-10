@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity,BaseEntity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,BaseEntity, ManyToOne, PrimaryGeneratedColumn, JoinColumn, RelationId } from "typeorm";
 import { Employee } from '../employees/employee.entity';
 
 
@@ -16,6 +16,7 @@ export class Task extends BaseEntity {
 
     @Column()
     task_image: string;
+
 
 
     @ManyToOne(() => Employee, employee => employee.tasks, {onDelete: 'SET NULL'})

@@ -1,15 +1,20 @@
 /* eslint-disable prettier/prettier */
 import { Employee } from './../employee.entity';
-import { IsIn, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsBoolean, IsIn, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 export class EmployeeDto {
   @IsNotEmpty()
   name: string;
 
   @IsNotEmpty()
-  bio: string;
+  biography: string;
+
+  @IsNumber()
+  age: number;
+
+  @IsBoolean()
+  isConfirmed: boolean;
 
   @IsOptional()
-  @IsIn([Employee])
   managerId: number;
 }

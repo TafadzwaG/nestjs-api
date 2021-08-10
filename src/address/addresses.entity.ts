@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { BaseEntity } from 'typeorm';
 
-import { ContactInfo } from "src/contactInfo/contact-info.entity";
+import { ContactInfo } from 'src/contactInfo/contact-info.entity';
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -22,12 +22,12 @@ export class Address extends BaseEntity{
     @Column()
     zip_code: string;
 
-
     @OneToOne(() => ContactInfo, contactInfo => contactInfo.address, {
         onDelete: 'SET NULL'
     })
     @JoinColumn()
     contactInfo: ContactInfo;
 
+    
    
 }

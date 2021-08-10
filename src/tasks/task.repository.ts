@@ -6,19 +6,7 @@ import { FilterTaskDto } from './dto/create-filter-task.dto';
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
-  async createTask(taskDto: TaskDto): Promise<Task> {
-    const { name, task_image, description, employeeId } = taskDto;
-
-    
-    const task = new Task();
-    task.name = name;
-    task.task_image = task_image;
-    task.description = description;
-
-    await task.save();
-
-    return task;
-  }
+ 
 
   async getTasks(filterTaskDto: FilterTaskDto): Promise<Task[]> {
     const { search } = filterTaskDto;

@@ -17,6 +17,6 @@ export class CreateAddressDto {
     @IsNotEmpty()
     zip_code: string;
 
-    @IsIn([ContactInfo])
-    contactInfoId :ContactInfo
+    @IsNotEmpty()
+    contactInfoId: number
 }

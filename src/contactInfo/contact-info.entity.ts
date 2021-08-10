@@ -22,6 +22,19 @@ export class ContactInfo extends BaseEntity {
   @Column()
   email: string;
 
+  @Column({
+    default: null,
+  })
+  twitter: string;
+
+  @Column({
+    default: null,
+  })
+  facebook: string;
+
+  @Column({ default: null })
+  instagram: string;
+
   @Column()
   employeeId: number;
 
