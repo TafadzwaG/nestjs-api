@@ -1,24 +1,31 @@
 /* eslint-disable prettier/prettier */
 import { EntityRepository, Repository } from 'typeorm';
 import { Employee } from './employee.entity';
+import { Meeting } from './../meetings/meeting.entity';
 import { EmployeeDto } from './dto/create-employee.dto';
 import { EmployeeFilterDto } from './dto/create-employee-filter.dto';
 import { ContactInfo } from './../contactInfo/contact-info.entity';
-
+import { MeetingsRepository } from 'src/meetings/meeting.repository';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @EntityRepository(Employee)
 export class EmployeeRepository extends Repository<Employee> {
   async createEmployee(employeeDto: EmployeeDto): Promise<Employee> {
-    const { name, biography, managerId , age } = employeeDto;
+    const { name, biography, managerId, age } = employeeDto;
 
     const employee = new Employee();
     employee.name = name;
     employee.biography = biography;
     employee.age = age;
+
+   
+
     await employee.save();
 
     return employee;
   }
+
+  
 
   async getEmployees(
     employeeFilterDto: EmployeeFilterDto,
@@ -26,11 +33,11 @@ export class EmployeeRepository extends Repository<Employee> {
     const { search } = employeeFilterDto;
 
     const query = this.createQueryBuilder('employee')
-                .leftJoinAndSelect("employee.directReports", "directReports")
-                .leftJoinAndSelect("employee.tasks", "tasks")
-                .leftJoinAndSelect("employee.contactInfo","contactInfo")
-                .leftJoinAndSelect("contactInfo.address", "address")
-                
+      .leftJoinAndSelect('employee.directReports', 'directReports')
+      .leftJoinAndSelect('employee.tasks', 'tasks')
+      .leftJoinAndSelect('employee.meetings', 'meetings')
+      .leftJoinAndSelect('employee.contactInfo', 'contactInfo')
+      .leftJoinAndSelect('contactInfo.address', 'address');
 
     try {
       if (search) {
@@ -43,13 +50,10 @@ export class EmployeeRepository extends Repository<Employee> {
       }
 
       const employees = await query.getMany();
-      
 
       return employees;
     } catch (error) {
       throw new Error(error);
     }
   }
-
-  
 }

@@ -6,3 +6,6 @@ import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Meeting)
 export class MeetingsRepository extends Repository<Meeting> {}
+
+
+

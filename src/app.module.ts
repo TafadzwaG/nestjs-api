@@ -1,16 +1,16 @@
-import { AddressesModule } from './address/addresses.module';
 /* eslint-disable prettier/prettier */
 
 import { TasksModule } from './tasks/tasks.module';
 import { MeetingModule } from './meetings/meeting.module';
 import { EmployeeModule } from './employees/employee.module';
 import { ContactInfoModule } from './contactInfo/contact-info.module';
-
+import { AddressesModule } from './address/addresses.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { typeOrmConfig } from './config/typeorm.config';
+import { MulterModule } from '@nestjs/platform-express';
 // import { DefaultAdminModule } from 'nestjs-admin'
 
 @Module({

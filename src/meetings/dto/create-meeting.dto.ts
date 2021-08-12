@@ -13,7 +13,6 @@ export class MeetingDto{
     @IsNotEmpty()
     zoomUrl: string;
 
-
     @IsNotEmpty()
     attendees: number[];
 }

@@ -12,7 +12,9 @@ export class ContactDto {
   @IsNotEmpty()
   email: string;
 
+
   @IsOptional()
+  
   twitter: string;
 
   @IsOptional()

@@ -11,7 +11,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     password: '',
     database: 'data_orm',
     entities: [
-        __dirname + '/../**/*.entity{.ts,.js}',
+        "dist/**/*.entity{.ts,.js}"
         // 'node_modules/nestjs-admin/**/*.entity.js',
         // "entity/*.js"
     ],

@@ -15,6 +15,23 @@ import { FilterTaskDto } from './dto/create-filter-task.dto';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 import { EmployeesService } from './../employees/employees.service';
+import { UseInterceptors, UploadedFile } from '@nestjs/common';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import { FileInterceptor } from '@nestjs/platform-express';
+
+const storage = {
+  storage: diskStorage({
+    destination: './task-images',
+    filename: (req, file, cb) => {
+      const generateRandomName = Array(32)
+        .fill(null)
+        .map(() => Math.round(Math.random() * 16).toString(16))
+        .join('');
+      return cb(null, `${generateRandomName}${extname(file.originalname)}`);
+    },
+  }),
+};
 
 @Controller('tasks')
 export class TasksController {
@@ -37,8 +54,10 @@ export class TasksController {
   }
 
   @Post('/create')
-  async createTask(@Body() taskDto: TaskDto): Promise<Task> {
+  @UseInterceptors(FileInterceptor('file', storage))
+  async createTask( @UploadedFile() file, @Body() taskDto: TaskDto): Promise<Task> {
     //Getting the employeeById to inject the Id in Newly created task
+    console.log(file);
     const employee = await this.employeesService.getEmployeeById(
       taskDto.employeeId,
     );
