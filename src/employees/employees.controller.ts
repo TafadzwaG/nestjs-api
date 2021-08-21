@@ -14,6 +14,7 @@ import {
 import { EmployeesService } from './employees.service';
 import { EmployeeDto } from './dto/create-employee.dto';
 import { Employee } from './employee.entity';
+import { Meeting } from 'src/meetings/meeting.entity';
 import { EmployeeFilterDto } from './dto/create-employee-filter.dto';
 
 @Controller('employee')
@@ -35,9 +36,12 @@ export class EmployeesController {
   }
 
   @Post()
-   // @UsePipes(ValidationPipe)
-  async createEmployee(@Body() employeeDto: EmployeeDto): Promise<Employee> {
-    return await this.employeesService.createEmployee(employeeDto);
+  @UsePipes(ValidationPipe)
+  async createEmployee(
+    @Body() employeeDto: EmployeeDto,
+    meeting: Meeting,
+  ): Promise<Employee> {
+    return await this.employeesService.createEmployee(employeeDto, meeting);
   }
 
   @Patch('/:id/update')

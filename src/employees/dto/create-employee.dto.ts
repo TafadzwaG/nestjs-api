@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Employee } from './../employee.entity';
 import { IsBoolean, IsIn, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { Meeting } from 'src/meetings/meeting.entity';
 
 export class EmployeeDto {
   @IsNotEmpty()
@@ -17,4 +18,7 @@ export class EmployeeDto {
 
   @IsOptional()
   managerId: number;
+
+  @IsOptional()
+  meetings: number[]
 }

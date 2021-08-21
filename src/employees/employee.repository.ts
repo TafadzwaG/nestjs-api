@@ -10,23 +10,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @EntityRepository(Employee)
 export class EmployeeRepository extends Repository<Employee> {
-  async createEmployee(employeeDto: EmployeeDto): Promise<Employee> {
-    const { name, biography, managerId, age } = employeeDto;
-
-    const employee = new Employee();
-    employee.name = name;
-    employee.biography = biography;
-    employee.age = age;
-
-   
-
-    await employee.save();
-
-    return employee;
-  }
-
-  
-
   async getEmployees(
     employeeFilterDto: EmployeeFilterDto,
   ): Promise<Employee[]> {

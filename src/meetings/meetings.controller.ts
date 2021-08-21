@@ -17,9 +17,6 @@ export class MeetingsController {
   @Post('/create')
   @UsePipes(ValidationPipe)
   async createMeeting(@Body() meetingDto: MeetingDto, employee:Employee): Promise<Meeting> {
-
-    const attendesData = await this.employeesService.getEmployeeById(2)
-
-    return await this.meetingsService.createMeeting(meetingDto, attendesData);
+    return await this.meetingsService.createMeeting(meetingDto, employee);
   }
 }
